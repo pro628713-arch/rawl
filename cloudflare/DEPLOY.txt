@@ -1,0 +1,17 @@
+راوي على Cloudflare Workers
+================================
+
+الحزمة تعمل وحدها. بيانات المعاينة لا تنتقل معها؛ التخزين هنا هو D1 على حسابك.
+
+1) أنشئ قاعدة D1 اسمها rawi من لوحة Cloudflare.
+2) افتح wrangler.toml وضع معرف القاعدة مكان REPLACE_WITH_D1_DATABASE_ID.
+3) من هذا المجلد:
+     npx wrangler d1 execute rawi --remote --file=schema.sql
+     npx wrangler deploy
+   الجداول تُنشأ أيضًا تلقائيًا عند أول طلب إذا كان الربط باسم DB موجودًا،
+   فيمكن تخطي أمر schema إن رغبت.
+4) بديل اللوحة: Workers → Create → الصق src/index.js
+   ثم Settings → Bindings → D1 database → الاسم DB.
+
+بعد النشر افتح الموقع، انشر سكربتًا، وانسخ الرابط الخام /raw/<slug>/<file>.
+رمز التحرير يُحفظ في المتصفح ويلزم للتعديل والحذف.
